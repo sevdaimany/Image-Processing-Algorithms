@@ -108,7 +108,13 @@ This project folder contains work related to a document scanner application. The
 
 ### `Project02_Segmentation`
 This project implements a multi-stage pipeline to restore and segment distorted drone footage. All major components are implemented from scratch without relying on high-level built-in MATLAB functions.
-* **Image Restoration:** Restores the blurred input image using **Richardson-Lucy (R-L) deconvolution**. The motion blur kernel for each image is derived from simulated IMU sensor data (theta and len). The iterative R-L algorithm ($\hat{u}^{(t+1)}=\hat{u}^{(t)}\cdot(\frac{d}{\hat{u}^{(t)}\otimes P}\otimes P^{*})$) is implemented in the **frequency domain** for efficiency.
+* **Image Restoration:** Restores the blurred input image using **Richardson–Lucy (R-L) deconvolution**. The motion blur kernel for each image is derived from simulated IMU sensor data (theta and len). The iterative R-L algorithm 
+
+$$
+\hat{u}^{(t+1)} = \hat{u}^{(t)} \cdot \left( \frac{d}{\hat{u}^{(t)} \otimes P} \otimes P^{*} \right)
+$$
+
+is implemented in the **frequency domain** for efficiency.
 * **Contrast Enhancement:** Applies a from-scratch implementation of the **Wallis filter** to enhance local contrast in the restored image.
 * **Texture Segmentation:** Uses **Laws' Texture Energy filters** to classify pixels into semantic classes (e.g., grass, trees, cars). Texture samples are manually fabricated from the restored image to train the filter.
 * **Post-Processing:** Refines the final segmentation map using **majority voting** to remove noise.
