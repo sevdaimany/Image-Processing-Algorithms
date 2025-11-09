@@ -1,0 +1,22 @@
+function output_img = myconv(input_img, kernel)
+
+    padded_img = padarray(input_img, [1, 1], 0);
+
+    rotated_kernel = rot90(kernel, 2);
+
+    output_img = zeros(size(input_img));
+    r = 1 % kernel size (2r +1, 2r+1) here (3, 3)
+
+    for y= 1:size(input_img, 1)
+        for x=1:size(input_img, 2)
+               submatrix = padded_img(y:y+r+r, x:x+r+r);
+               output_img(x, y)  = sum(submatrix.*kernel, 'all')
+
+        
+        end
+    end
+
+
+    
+   
+end

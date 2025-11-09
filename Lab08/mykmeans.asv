@@ -1,0 +1,13 @@
+function [LUT, M, iter] = mykmeans(S, k)
+   [LUT, M] = step1_initialization(S, k);
+   iterations = 1
+   while converged > 0.02 & iterations <100
+       LUT = step2_assignment(S, k, LUT, M);
+       previous_M = M;
+       M = step3_update(S, k, LUT, M);
+       converged = sum((M(:) - previous_M(:)).^2)
+       
+   end
+
+ 
+end

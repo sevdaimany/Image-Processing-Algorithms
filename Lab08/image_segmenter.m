@@ -1,0 +1,13 @@
+function [O] = image_segmenter(I, k)
+    [h, w, c] = size(I);
+    S = reshape(I, [h*w, 3]);
+    [LUT, M, iter] = mykmeans(S, k);
+    O = zeros(h , w, 3);
+    LUT = reshape(LUT , [h, w]);
+    for i = 1:k
+        mask = (LUT == i);          
+        for j = 1:3                
+            O(:, :, j) = O(:, :, j) + mask * M(i, j);
+        end
+    end
+end
